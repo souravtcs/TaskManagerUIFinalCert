@@ -1,0 +1,40 @@
+<form [formGroup]="myForm" (submit)="onSubmit()">
+  <div *ngIf="message!=''" class={{alertClass}} role="alert">
+    {{message}}
+  </div>
+  <div class="form-group">
+    <label for="user">User</label>
+    <input type="hidden" class="form-control" id="userId" name="userId" formControlName="userId">
+    <input type="hidden" class="form-control" id="userStatus" name="userStatus" formControlName="userStatus">
+    <input type="text" class="form-control" id="name" name="name" formControlName="name">
+    <small *ngIf="!myForm.controls['name'].valid && myForm.controls['name'].dirty">Invalid user!!</small>
+  </div>
+
+  <div class="form-group">
+    <label for="employeeId">Employee Id</label>
+    <input type="number" class="form-control" id="employeeId" name="employeeId" formControlName="employeeId">
+  </div>
+
+  <div class="form-group">
+    <label for="projectName">Project</label>
+    <input type="text" class="form-control" id="projectName" name="projectName" formControlName="projectName">
+    <small *ngIf="!myForm.controls['projectName'].valid && myForm.controls['projectName'].dirty">Invalid Project!!</small>
+  </div>
+  <div class="form-group">
+      <label for="taskName">Task</label>
+      <input type="text" class="form-control" id="taskName" name="taskName" formControlName="taskName">
+      <small *ngIf="!myForm.controls['taskName'].valid && myForm.controls['taskName'].dirty">Invalid Task!!</small>
+  </div>
+  
+  <ng-container *ngIf="myForm.controls['userStatus'].value === 1; else else1">
+      <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
+      &nbsp;<button type="button" (click)="updateUser()" class="btn btn-primary" [disabled]="!myForm.valid">Update</button>   
+      &nbsp;<button type="button" (click)="resetUser()" class="btn btn-primary">Reset</button>
+  </ng-container>
+  <ng-template #else1>
+      <button type="button" class="btn btn-primary" disabled>Submit</button>
+      &nbsp;<button type="button" class="btn btn-primary" disabled>Update</button>   
+      &nbsp;<button type="button" class="btn btn-primary" disabled>Reset</button>
+  </ng-template>
+  
+    <form>

@@ -1,0 +1,59 @@
+<div *ngIf="message!=''" class={{alertClass}} role="alert">
+  {{message}}
+</div>
+
+
+<div class="row mb-2 mt-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">User</span>
+    <input #userSearch (change)="0" type="text" class="form-control" aria-label="user" 
+    aria-describedby="basic-addon1">
+  </div>  
+</div>
+<div class="row mb-2 mt-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Project</span>
+    <input #projectSearch (change)="0" type="text" class="form-control" aria-label="Project" 
+    aria-describedby="basic-addon1">
+  </div>  
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Task</span>
+    <input #taskSearch (change)="0" type="text" class="form-control" aria-label="Task" 
+    aria-describedby="basic-addon1">
+  </div> 
+</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User</th>
+      <th scope="col">Employee Id</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">Task Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users | filterUser: userSearch.value:projectSearch.value:taskSearch.value; let i= index">
+      <th scope="row">{{i+1}}</th>
+      <td><a class="nav-link active" routerLink="/editUser/{{user.userId}}">{{user.name}}</a></td>      
+      <td>{{user.employeeId}}</td>
+      <td>{{user.projectName}}</td>
+      <td>{{user.taskName}}</td>
+
+
+      <!--td><button type="button" (click)="updateTaskStatus(task.taskId)" class="btn btn-danger">End Task</button></td-->
+      <td>
+        <ng-container *ngIf="user.userStatus === 1; else else1">
+            <button type="button" (click)="updateUserStatus(user.userId)" class="btn btn-danger">Disable User</button>
+        </ng-container>
+        <ng-template #else1>
+            <button type="button" class="btn btn-danger" disabled>Disable User</button>
+        </ng-template>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>

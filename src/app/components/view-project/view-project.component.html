@@ -1,0 +1,73 @@
+<div *ngIf="message!=''" class={{alertClass}} role="alert">
+  {{message}}
+</div>
+
+
+<div class="row mb-2 mt-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Project</span>
+    <input #projectSearch (change)="0" type="text" class="form-control" aria-label="Task" 
+    aria-describedby="basic-addon1">
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Priority From</span>
+    <input #priorityFromSearch (change)="0" type="text" class="form-control" aria-label="Priority From" 
+    aria-describedby="basic-addon1">
+  </div>
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Priority To</span>
+    <input #priorityToSearch (change)="0" type="text" class="form-control" aria-label="Priority To" 
+    aria-describedby="basic-addon1">
+  </div> 
+</div>
+
+<div class="row mb-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Date From</span>
+    <input #dateFromSearch (change)="0" type="Date" class="form-control" aria-label="Date From" 
+    aria-describedby="basic-addon1" pattern="">
+  </div>
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Date To</span>
+    <input #dateToSearch (change)="0" type="Date" class="form-control" aria-label="Date To" 
+    aria-describedby="basic-addon1" pattern="">
+  </div> 
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Project</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let project of projects | filterProject: projectSearch.value:
+    priorityFromSearch.value:priorityToSearch.value:dateFromSearch.value:dateToSearch.value; let i= index">
+      <th scope="row">{{i+1}}</th>
+      <td><a class="nav-link active" routerLink="/editProject/{{project.projectId}}">{{project.projectName}}</a></td>
+      <td>{{project.priority}}</td>
+      <td>{{project.startDate}}</td>
+      <td>{{project.endDate}}</td>
+
+
+      <!--td><button type="button" (click)="updateTaskStatus(task.taskId)" class="btn btn-danger">End Task</button></td-->
+      <td>
+        <ng-container *ngIf="project.projectStatus === 1; else else1">
+            <button type="button" (click)="updateProjectStatus(project.projectId)" class="btn btn-danger">End Project</button>
+        </ng-container>
+        <ng-template #else1>
+            <button type="button" class="btn btn-danger" disabled>End Project</button>
+        </ng-template>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>

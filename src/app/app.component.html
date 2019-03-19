@@ -1,0 +1,30 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">View Task</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/addTask" routerLinkActive="active">Add Task</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/viewProject" routerLinkActive="active">View Project</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/addProject" routerLinkActive="active">Add Project</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/viewUser" routerLinkActive="active">View Users</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/addUser" routerLinkActive="active">Add User</a>
+  </li>
+  
+</ul>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+
+
